@@ -22,9 +22,9 @@ The user is expected to create a "blank" project.
      
 ## Relevant logs and/or screenshots
 Current Title: Create black project
-![Alt text](../Image/Bug_Screenshot.png)
-Expected Title: Create blank project
 ![Alt text](../Image/Bug_Project_create_blank.png)
+Expected Title: Create blank project
+![Alt text](../Image/Bug_Screenshot.png)
 ## Possible fixes
 The fix involves a simple spelling correction, changing "black" to "blank."
 or
