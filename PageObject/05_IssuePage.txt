@@ -7,8 +7,8 @@ Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
 # TODO: Write Precondition and Postcondition, Tags 
 
 Pre Condition	Tips: Project must be created by the user before 
-Post Condition	
-Tags
+Post Condition	Close browser
+Tags	Issue, TS-4-Issue  
 
 #******************* Common Variables ********************
 
@@ -18,6 +18,10 @@ Tags
 # NOTE: Please Remove your login credential before uploading Assignments
 
 # TODO: Write Issue creation field variables, Updated name of the issue
+
+PROJECT_URL = https://gitlab.com/korhvi/Ville_Korhonen_Testing_Project/
+Issue_Name = TestIssue1
+Issue_Name_Updated = UpdatedIssue
 
 
 
@@ -29,7 +33,28 @@ Tags
 
 # Positive Test examples are below write test process steps for each below test case
 
-	Create issue,
- 	Update name of issue, 
-	Create second issue with privious updated name
-    Delete first issue
+Create issue
+	Navigate to Issue Creation Page  IssueCreationUrl
+	Input Issue Title  FirstIssue
+	Input Issue Description  This is the first issue.
+	Click Issue Creation Button
+	Verify Issue Created Successfully
+
+Update name of issue
+	Navigate to Issue Page for FirstIssue
+	Input Updated Issue Title  UpdatedIssue
+	Click Save Changes Button
+	Verify Issue Title Updated Successfully
+
+Create second issue with previous updated name
+	Navigate to Issue Creation Page  IssueCreationUrl
+	Input Issue Title  UpdatedIssue
+	Input Issue Description  This is the second issue.
+	Click Issue Creation Button
+	Verify Second Issue Created Successfully
+
+Delete first issue
+	Navigate to Issue Page for FirstIssue
+	Click Delete Issue Button
+	Confirm Issue Deletion
+	Verify First Issue Deleted Successfully
