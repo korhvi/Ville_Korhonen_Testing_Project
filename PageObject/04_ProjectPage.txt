@@ -5,13 +5,13 @@
 
 # TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
 
-Documentation	
+Documentation	 Project Test scenario. CRUD Operation: Create, Read, Update, Delete
 
 # TODO: Write Precondition, Postcondition, Tags
 
-Pre Condition	 
-Post Condition	
-Tags
+Pre Condition    
+Post Condition   
+Tags    Project, TS-3-Project
 
 #******************* Common Variables ********************
 
@@ -20,6 +20,12 @@ Tags
 # NOTE: Please Remove your login credential before uploading Assignments
 
 # TODO: Write Project creation field variables
+
+ProjectCreationUrl = https://gitlab.com/projects/new
+ProjectNameField = //input[@id='project_name']
+ProjectDescriptionField = //textarea[@id='project_description']
+ProjectVisibilityDropdown = //select[@id='project_visibility_level']
+ProjectCreationButton = //button[@name='commit']
 
 
 
@@ -31,14 +37,44 @@ Tags
 
 # Positive Test examples are below write test process steps for each below test case
 
-	Create blank project
-	Create template project 
-	Update name of template project
-	Delete template project
-	Valide that message is showing Project 'First project ' was successfully created.
+Create blank project
+	Navigate to Project Creation Page  ProjectCreationUrl
+	Click Project Creation Button
+	Verify Blank Project Created Successfully
+
+Create template project 
+	Navigate to Project Creation Page  ProjectCreationUrl
+	Input Project Name  TemplateProject
+	Input Project Description  This is a template project.
+	Select Project Visibility  Private
+	Click Project Creation Button
+	Verify Template Project Created Successfully
+
+Update name of template project
+	Navigate to Project Settings Page for TemplateProject
+	Input New Project Name  UpdatedTemplateProject
+	Click Save Changes Button
+	Verify Project Name Updated Successfully
+
+Delete template project
+	Navigate to Project Settings Page for UpdatedTemplateProject
+	Click Delete Project Button
+	Confirm Project Deletion
+	Verify Template Project Deleted Successfully
+
+Validate that the message shows "Project 'First project' was successfully created."
+	Navigate to Project Creation Page  ProjectCreationUrl
+	Input Project Name  FirstProject
+	Input Project Description  This is the first project.
+	Select Project Visibility  Public
+	Click Project Creation Button
+	Verify Success Message Displayed: "Project 'First project' was successfully created."
+
 
 # Negative Test examples are below write test process steps for each below test case
 
-	Create a blank project with the previous same name
-
-
+Create a blank project with the previous same name
+	Navigate to Project Creation Page  ProjectCreationUrl
+	Input Project Name  FirstProject
+	Click Project Creation Button
+	Verify System Does Not Allow Creation of Project With Duplicate Name
