@@ -3,15 +3,12 @@
 
 *** Settings ***
 
-# TODO: Write Documentation e.g. User Registration Test scenario with verification, valid and invalid credentials.
+Documentation    User Registration Test scenario with verification, valid and invalid credentials.
 
-Documentation	
+Pre Condition     User is on the registration page.
+Post Condition    User registration process is completed.
 
-# TODO: Write Precondition, Postcondition, Tags
-
-Pre Condition	
-Post Condition	
-Tags
+Tags              Registration, TS-2-Registration  
 
 #******************* Common Variables ********************
 
@@ -23,7 +20,15 @@ Tags
 
 LoginUrl = https://gitlab.com/users/sign_up
 
-
+FirstName = <FirstName>  
+LastName = <LastName>  
+Username = <Username>  
+Email = <email@mail.com>  
+Password = <user1234>  
+SecondUsername = <Username>  
+SecondEmail = <email1@mail.com>  
+ThirdUsername = <Username>  
+Invalid_Email= <email>  
 
 #******************** Test Cases *************************
 
@@ -33,14 +38,55 @@ LoginUrl = https://gitlab.com/users/sign_up
 
 # Positive Test examples are below write test process steps for each below test case
 
-	Register user with valid username and password 
-	- Remember credentials which you are going to use for whole application testing 
+# Register user with valid username and password
+    Navigate To Registration Page  LoginUrl
+    Input First Name    ValidFirstName
+    Input Last Name     ValidLastName
+    Input Email         ValidEmail
+    Input Password      ValidPassword
+    Confirm Password    ValidPassword
+    Click Registration Button
+    Verify User Successfully Registered
 
 # Negative Test examples keywords are below write test process steps for each below test case 
 
-	Register user with same above username,
-		...empty password,
-		...invalid email,
-		...Without recaptcha,
+# Register user with same above username
+    Navigate To Registration Page  LoginUrl
+    Input First Name    ValidFirstName
+    Input Last Name     ValidLastName
+    Input Email         ValidEmail
+    Input Password      ValidPassword
+    Confirm Password    ValidPassword
+    Click Registration Button
+    Verify System Does Not Allow Registration With the Same Username
 
+# Register user with empty password
+    Navigate To Registration Page  LoginUrl
+    Input First Name    ValidFirstName
+    Input Last Name     ValidLastName
+    Input Email         ValidEmail
+    Leave Password Fields Empty
+    Click Registration Button
+    Verify System Does Not Allow Registration With an Empty Password
+
+# Register user with invalid email
+    Navigate To Registration Page  LoginUrl
+    Input First Name    ValidFirstName
+    Input Last Name     ValidLastName
+    Input Email         InvalidEmailFormat
+    Input Password      ValidPassword
+    Confirm Password    ValidPassword
+    Click Registration Button
+    Verify System Does Not Allow Registration With an Invalid Email
+
+# Register user without recaptcha
+    Navigate To Registration Page  LoginUrl
+    Input First Name    ValidFirstName
+    Input Last Name     ValidLastName
+    Input Email         ValidEmail
+    Input Password      ValidPassword
+    Confirm Password    ValidPassword
+    Leave Recaptcha Field Empty
+    Click Registration Button
+    Verify System Does Not Allow Registration Without Completing Recaptcha
 
